@@ -10,7 +10,8 @@
     "regularCrawler": "cd src && cd laochen && cd regular && node index.js",
     "cheerioCrawler": "cd src && cd laochen && cd cheerio && node index.js",
     "puppeteerCrawler": "cd src && cd laochen && cd puppeteer && nodemon index.js",
-    "puppeteerClickCrawler": "cd src && cd laochen && cd puppeteer && nodemon index_click.js"
+    "puppeteerClickCrawler": "cd src && cd laochen && cd puppeteer && nodemon index_click.js",
+    "puppeteerBook": "cd src && cd laochen && cd sobooks && nodemon index.js"
   },
   "dependencies": {
     "axios": "^0.21.1",

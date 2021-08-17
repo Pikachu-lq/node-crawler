@@ -16,7 +16,9 @@ async function puppeteerFun() {
       width: 1400,
       height: 800
     },
-    headless: false
+    headless: false,
+    // 设置放慢每个步骤的毫秒数
+    slowMo: 250
   }
   const browser = await puppeteer.launch(options)
   // 打开新页面
