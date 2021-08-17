@@ -26,8 +26,22 @@ async function puppeteerFun() {
   await page.goto("https://www.dytt8.net/")
 
   // 获取页面对象
-  const elementsList = await page.$$("#menu li a")
-  elementsList[2].click()
+  // const elementsList = await page.$$("#menu li a")
+  // elementsList[2].click()
+
+  const inputEle = await page.$(".search .formhue");
+  console.log("inputEle", inputEle);
+  await inputEle.focus();
+  await page.keyboard.type("蝙蝠侠")
+  await page.$eval(".bd3rl>.search", (element) => {
+    element.addEventListener('click', (event) => {
+      // 事实上stoppropagation和cancelBubble的作用是一样的，都是用来阻止浏览器默认的事件冒泡行为。
+      event.cancelBubble = true
+    })
+  })
+
+  const btnEle = await page.$('.searchr input[name="Submit"]')
+  await btnEle.click()
 
 
 }
