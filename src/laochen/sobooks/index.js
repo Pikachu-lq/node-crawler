@@ -20,19 +20,38 @@ const httpUrl = "https://sobooks.cc";
   }
   const browser = await puppeteer.launch(debugOptions)
 
-  // 进入网站，获取整个网站列表页的页数
-  const getAllNum = async () => {
-    const page = await browser.newPage()
-    await page.goto(httpUrl)
-    const pageNum = await page.$eval(".pagination li:last-child span", (element) => {
-      let text = element.innerHTML;
-      text = text.substring(1, text.length - 1).trim()
-      return text
-    })
-    return pageNum
+  try {
+
+
+    // 进入网站，获取整个网站列表页的页数
+    const getAllNum = async () => {
+      const page = await browser.newPage()
+      await page.goto(httpUrl)
+      const pageNum = await page.$eval(".pagination li:last-child span", (element) => {
+        let text = element.innerHTML;
+        text = text.substring(1, text.length - 1).trim()
+        return text
+      })
+      page.close()
+      return pageNum
+    }
+    const pageNum = await getAllNum()
+    // console.log("pageNum", pageNum);
+
+    const pageList = async (num) => {
+      const pageListUrl = `https://sobooks.cc/page/${num}`;
+      const page = await browser.newPage()
+      // 访问列表页地址
+      await page.goto(pageListUrl)
+      await page.$$eval(".card .card-item thumb-img a")
+    }
+
+  } catch (error) {
+    console.log("error", error);
   }
-  const pageNum = await getAllNum()
-  console.log("pageNum", pageNum);
+
+
+
 
 })();
 
